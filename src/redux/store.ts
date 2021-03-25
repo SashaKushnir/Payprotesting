@@ -1,7 +1,11 @@
 import thunkMW from 'redux-thunk'
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
+import { weatherReducer } from "./weather/weatherReducer";
+import { sportsReducer } from "./sports/sportsReducer";
 
 let reducersList = combineReducers({
+    weather: weatherReducer,
+    sports: sportsReducer
 })
 export type RootState = ReturnType<typeof reducersList>
 

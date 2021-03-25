@@ -1,33 +1,25 @@
-import React, { useState,  } from 'react';
+import React, { useEffect, useState, } from 'react';
 import './App.css';
+import { useDispatch } from "react-redux";
+import { setWeather } from "./redux/weather/weatherReducer";
+import { WeatherPage } from "./components/WeatherPage/WeatherPage";
+import { Switch, Redirect, Route, BrowserRouter } from 'react-router-dom'
+import { MyPage } from "./components/markup/MyPage/MyPage";
 
 export const App = () => {
-    const [lat, setLat] = useState(null as any);
-    const [lng, setLng] = useState(null as any);
-    const [status, setStatus] = useState(null as any);
-    const getLocation = () => {
-        if (!navigator.geolocation) {
-            setStatus('Geolocation is not supported by your browser');
-        } else {
-            setStatus('Locating...');
-            navigator.geolocation.getCurrentPosition((position) => {
-                setStatus(null);
-                setLat(position.coords.latitude);
-                setLng(position.coords.longitude);
-            }, () => {
-                setStatus('Unable to retrieve your location');
-            });
-        }
-    }
-    return <div className="App">
-        <button onClick={getLocation}>Get Location</button>
-        <h1>Coordinates</h1>
-    <p>{status}</p>
-    {
-        lat && <p>Latitude: {lat}</p>
-    }
-    {
-        lng && <p>Longitude: {lng}</p>
-    }
-</div>
+    let d = useDispatch()
+    useEffect(() => {
+        d(setWeather())
+    }, [])
+    return <BrowserRouter>
+        <div className="App">
+
+            <Switch>
+                <Redirect exact from="/" to="/content"/>
+                <Route path='/login' render={() => <div>Authorisation</div>}/>
+                <Route path='/content' render={() => <MyPage/>}/>
+                <Route path='*' render={() => <div>Error, empty link</div>}/>
+            </Switch>
+        </div>
+    </BrowserRouter>
 }
