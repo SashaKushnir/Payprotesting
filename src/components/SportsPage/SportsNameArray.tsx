@@ -16,7 +16,7 @@ export const SportsNameArray: React.FC<SportsNameArrayProps> = ({arrayOfTheSport
         return <SportItem key={index} sportI={obj}/>
     })
     return <div>
-        <div>{sportName}: </div>
+        <div className={s.title}>{sportName}</div>
         <div className ={s.sportsArray}>
             {sportItemArray}
         </div>

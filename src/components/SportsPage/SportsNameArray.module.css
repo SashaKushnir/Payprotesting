@@ -1,3 +1,15 @@
 .sportsArray{
-    margin-left: 5px ;
+    margin-left: 5px;
+
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-gap: 10px;
+    background-color: #fff;
+    color: #444;
+}
+.title{
+    text-align: center;
+    font-weight: bold;
+    font-size: 19px;
+    text-transform: capitalize;
 }
